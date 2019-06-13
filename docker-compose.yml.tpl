@@ -3,7 +3,7 @@ cool-jconon-szn:
   mem_limit: 1g
   read_only: true
   ports:
-  - 8980:8080
+  - 8380:8080
   environment:
   - FLOWS_ENABLE=true
   - LANG=it_IT.UTF-8
