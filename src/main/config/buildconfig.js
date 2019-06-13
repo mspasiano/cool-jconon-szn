@@ -177,11 +177,6 @@
 
   //for each module, excludeShallow: []
   modules: [
-    {
-      name: 'ws/application/application'
-    },
-    {
-      name: 'ws/helpdesk/main.get'
-    }
+
   ]
 })
