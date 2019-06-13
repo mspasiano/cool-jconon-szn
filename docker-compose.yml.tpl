@@ -1,4 +1,4 @@
-jcononszn:
+cool-jconon-szn:
   image: docker.si.cnr.it/##{CONTAINER_ID}##
   mem_limit: 1g
   read_only: true
