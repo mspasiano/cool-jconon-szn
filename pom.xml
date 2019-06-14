@@ -10,7 +10,7 @@
     </parent>
 
     <artifactId>cool-jconon-szn</artifactId>
-    <version>0.0.2-SNAPSHOT</version>
+    <version>0.0.3-SNAPSHOT</version>
     <name>Concorsi On-Line Stazione Zoologica Anton Dohrn</name>
 
     <properties>

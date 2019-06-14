@@ -8,7 +8,7 @@ stages:
   - release
 
 variables:
-  MAVEN_OPTS: "-Djava.awt.headless=true -Dmaven.repo.local=./.m2/repository"
+  MAVEN_OPTS: "-Djava.awt.headless=true -Dmaven.repo.local=./.m2/repository -Dnexus.url=$NEXUS_URL"
   MAVEN_CLI_OPTS: "-s .m2/settings.xml --batch-mode --errors --fail-at-end --show-version"
   CONTAINER_TEST_IMAGE: $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME
   CONTAINER_RELEASE_IMAGE: $CI_REGISTRY_IMAGE:latest
@@ -19,7 +19,7 @@ cache:
   # keep cache across branch
   key: "$CI_BUILD_REF_NAME"
   
-maven-package:
+maven-deploy:
   stage: deploy
   image: maven:alpine
   script: "mvn clean deploy $MAVEN_CLI_OPTS"
