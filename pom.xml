@@ -9,7 +9,7 @@
     </parent>
 
     <artifactId>cool-jconon-szn</artifactId>
-    <version>0.0.4-SNAPSHOT</version>
+    <version>0.0.4</version>
     <name>Concorsi On-Line Stazione Zoologica Anton Dohrn</name>
 
     <properties>
@@ -285,7 +285,7 @@
         <connection>scm:git:git@git.si.cnr.it:documentale/cool-jconon-szn.git</connection>
         <developerConnection>scm:git:git@git.si.cnr.it:documentale/cool-jconon-szn.git</developerConnection>
         <url>http://git.si.cnr.it/documentale/cool-jconon-szn</url>
-        <tag>HEAD</tag>
+        <tag>cool-jconon-szn-0.0.4</tag>
     </scm>
 
     <licenses>
