@@ -34,7 +34,7 @@ install-curl:
     - apk add --update curl && rm -rf /var/cache/apk/*
   script:
     - >
-      curl google.com
+      curl http://www.google.com
 
 
 #Ad ogni nuovo commit sul master viene fatta la push sul docker registry.
@@ -52,7 +52,8 @@ docker-build-push-master:
 catapult-deploy-image:
   stage: build
   script:
-    - curl --fail -s  -X POST $CATAPULT_URL -H 'Content-type:application/json' --data '{"id":"documentale/cool-jconon-szn:master"}'
+    - >
+      curl --fail -s  -X POST $CATAPULT_URL -H 'Content-type:application/json' --data '{"id":"documentale/cool-jconon-szn:master"}'
 
 #la docker build dei branch diversi dal master viene fatta sempre.
 docker-build-push-branch:
