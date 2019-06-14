@@ -4,6 +4,7 @@ services:
 
 stages:
   - deploy
+  - installcurl
   - build
   - release
 
@@ -26,6 +27,15 @@ maven-deploy:
   artifacts:
     paths:
       - target/*.war
+
+install-curl:
+  stage: installcurl
+  before_script:
+    - apk add --update curl && rm -rf /var/cache/apk/*
+  script:
+    - >
+      curl google.com
+
 
 #Ad ogni nuovo commit sul master viene fatta la push sul docker registry.
 docker-build-push-master:
