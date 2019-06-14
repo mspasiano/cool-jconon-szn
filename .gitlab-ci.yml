@@ -42,7 +42,7 @@ docker-build-push-master:
 catapult-deploy-image:
   stage: build
   script:
-    - jenkins_response=$(curl --fail -s  -X POST $CATAPULT_URL -H 'Content-type: application/json' --data '{"id":"documentale/cool-jconon-szn:master"}')
+    - jenkins_response=$(curl --fail -s  -X POST $CATAPULT_URL -H 'Content-type:application/json' --data '{"id":"documentale/cool-jconon-szn:master"}')
 
 #la docker build dei branch diversi dal master viene fatta sempre.
 docker-build-push-branch:
