@@ -283,9 +283,9 @@
     </dependencyManagement>
 
     <scm>
-        <connection>scm:git:git@github.com:ConsiglioNazionaledelleRicerche/cool-jconon-szn.git</connection>
-        <developerConnection>scm:git:git@github.com:ConsiglioNazionaledelleRicerche/cool-jconon-szn.git</developerConnection>
-        <url>scm:git:git@github.com:ConsiglioNazionaledelleRicerche/cool-jconon-szn.git</url>
+        <connection>scm:git:git@git.si.cnr.it:documentale/cool-jconon-szn.git</connection>
+        <developerConnection>scm:git:git@git.si.cnr.it:documentale/cool-jconon-szn.git</developerConnection>
+        <url>http://git.si.cnr.it/documentale/cool-jconon-szn</url>
         <tag>HEAD</tag>
     </scm>
 

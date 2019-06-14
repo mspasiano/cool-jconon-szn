@@ -58,16 +58,13 @@ catapult-deploy-image:
     - >
       curl --fail -s  -X POST $CATAPULT_URL -H 'Content-type:application/json' --data '{"id":"documentale/cool-jconon-szn:master"}'
 
-#la release sul docker registry dei branch diversi dal master è opzionale e manuale.
-docker-release-branch:
+#la release è opzionale e manuale.
+Perform Maven Release:
   stage: release
+  image: maven:alpine
   script:
-    - docker build -t $CONTAINER_TEST_IMAGE .  
-    - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY  
-    - docker tag $CONTAINER_TEST_IMAGE $CONTAINER_RELEASE_IMAGE
-    - docker push $CONTAINER_RELEASE_IMAGE
+    - "mvn -Dresume=false release:prepare release:perform -Pprod -DskipTests"
   except:
-    - master  
-#    - spring-boot-2
+    - branches
   when: manual
   
