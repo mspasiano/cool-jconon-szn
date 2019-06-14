@@ -3,7 +3,7 @@ services:
   - docker:dind
 
 stages:
-  - package
+  - deploy
   - build
   - release
 
@@ -20,9 +20,9 @@ cache:
   key: "$CI_BUILD_REF_NAME"
   
 maven-package:
-  stage: package
+  stage: deploy
   image: maven:alpine
-  script: "mvn clean package $MAVEN_CLI_OPTS"
+  script: "mvn clean deploy $MAVEN_CLI_OPTS"
   artifacts:
     paths:
       - target/*.war
