@@ -25,7 +25,7 @@ maven-package:
   script: "mvn clean package $MAVEN_CLI_OPTS"
   artifacts:
     paths:
-      - target/*.jar
+      - target/*.war
 
 #Ad ogni nuovo commit sul master viene fatta la push sul docker registry.
 docker-build-push-master:
