@@ -63,7 +63,7 @@ Perform Maven Release:
   stage: release
   image: maven:alpine
   script:
-    - "mvn -Dresume=false release:prepare release:perform -Pprod -DskipTests"
+    - "mvn $MAVEN_CLI_OPTS -Dresume=false release:prepare release:perform -Pprod -DskipTests"
   except:
     - branches
   when: manual
