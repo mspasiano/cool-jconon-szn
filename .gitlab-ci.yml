@@ -4,8 +4,8 @@ services:
 
 stages:
   - deploy
-  - installcurl
   - build
+  - catapult
   - release
 
 variables:
@@ -28,15 +28,6 @@ maven-deploy:
     paths:
       - target/*.war
 
-install-curl:
-  stage: installcurl
-  before_script:
-    - apk add --update curl && rm -rf /var/cache/apk/*
-  script:
-    - >
-      curl http://www.google.com
-
-
 #Ad ogni nuovo commit sul master viene fatta la push sul docker registry.
 docker-build-push-master:
   stage: build
@@ -48,13 +39,6 @@ docker-build-push-master:
   only:
     - master
 
-#Ad ogni nuovo commit sul master viene fatta la push sul docker registry.
-catapult-deploy-image:
-  stage: build
-  script:
-    - >
-      curl --fail -s  -X POST $CATAPULT_URL -H 'Content-type:application/json' --data '{"id":"documentale/cool-jconon-szn:master"}'
-
 #la docker build dei branch diversi dal master viene fatta sempre.
 docker-build-push-branch:
   stage: build
@@ -63,6 +47,16 @@ docker-build-push-branch:
   except:
     - master
 #    - spring-boot-2
+
+
+#Aggiorno il container con l'immagine docker creata.
+catapult-deploy-image:
+  stage: catapult
+  before_script:
+    - apk add --update curl && rm -rf /var/cache/apk/*
+  script:
+    - >
+      curl --fail -s  -X POST $CATAPULT_URL -H 'Content-type:application/json' --data '{"id":"documentale/cool-jconon-szn:master"}'
 
 #la release sul docker registry dei branch diversi dal master è opzionale e manuale.
 docker-release-branch:
