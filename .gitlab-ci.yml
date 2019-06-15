@@ -47,7 +47,8 @@ catapult-deploy-image:
   script:
     - >
       curl --fail -s  -X POST $CATAPULT_URL -H 'Content-type:application/json' --data '{"id":"'"$CI_PROJECT_PATH:$CI_COMMIT_REF_NAME"'"}'
-
+  except:
+    - tags
 #la release è opzionale e manuale.
 Perform Maven Release:
   stage: release
@@ -73,8 +74,7 @@ Perform Maven Release:
     - git config --global user.email "marco.spasiano@cnr.it"
     - git config --global user.name "marco.spasiano"
     - git checkout -B "$CI_BUILD_REF_NAME"
-    - mvn release:prepare $MAVEN_CLI_OPTS -B -DskipTests=true
-    - mvn release:perform $MAVEN_CLI_OPTS -B -DskipTests=true
+    - mvn $MAVEN_CLI_OPTS release:prepare release:perform -Pprod -B -DskipTests=true
   only:
     - master
   when: manual
