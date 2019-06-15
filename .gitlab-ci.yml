@@ -59,9 +59,7 @@ Perform Maven Release:
     - ssh-add <(echo "$GIT_SSH_PRIV_KEY")
     - git config --global user.email "marco.spasiano@cnr.it"
     - git config --global user.name "marco.spasiano"
-    - mkdir -p ~/.ssh
-    - cat gitlab-known-hosts >> ~/.ssh/known_hosts
-  script:
+ script:
     - "mvn $MAVEN_CLI_OPTS -Dresume=false release:prepare release:perform -Pprod -DskipTests"
   only:
     - master
