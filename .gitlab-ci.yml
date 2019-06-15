@@ -39,6 +39,16 @@ docker-build-push-master:
   only:
     - master
 
+#Ad ogni nuovo commit sul master viene fatta la push sul docker registry.
+docker-build-push-branches:
+  stage: build
+  script:
+    - docker build -t $CONTAINER_TEST_IMAGE .
+    - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY
+    - docker push $CI_REGISTRY/$CONTAINER_TEST_IMAGE
+  only:
+    - branches
+
 #Aggiorno il container con l'immagine docker creata.
 catapult-deploy-image:
   stage: catapult
