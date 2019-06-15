@@ -61,7 +61,7 @@ catapult-deploy-image:
     - apk add --update curl && rm -rf /var/cache/apk/*
   script:
     - >
-      curl -s  -X POST $CATAPULT_URL -H 'Content-type:application/json' --data '{"id":"'"$CI_PRO JECT_PATH:$CI_COMMIT_REF_NAME"'"}'
+      curl -s  -X POST $CATAPULT_URL -H 'Content-type:application/json' --data '{"id":"'"$CI_PRO JECT_PATH:$CI_COMMIT_REF_NAME"'", "git":true}'
   except:
     - tags
 
