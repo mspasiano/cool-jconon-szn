@@ -74,7 +74,7 @@ Perform Maven Release:
     - git config --global user.email "marco.spasiano@cnr.it"
     - git config --global user.name "marco.spasiano"
     - git checkout -B "$CI_BUILD_REF_NAME"
-    - mvn $MAVEN_CLI_OPTS release:prepare release:perform -Pprod -B -DskipTests=true
+    - mvn $MAVEN_CLI_OPTS release:prepare -Pprod -B -DskipTests=true
   only:
     - master
   when: manual
