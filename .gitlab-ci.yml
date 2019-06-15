@@ -56,12 +56,14 @@ catapult-deploy-image:
     - apk add --update curl && rm -rf /var/cache/apk/*
   script:
     - >
-      curl --fail -s  -X POST $CATAPULT_URL -H 'Content-type:application/json' --data '{"id":"documentale/cool-jconon-szn:master"}'
+      curl --fail -s  -X POST $CATAPULT_URL -H 'Content-type:application/json' --data '{"id":"$CI_PROJECT_NAME:$CI_COMMIT_REF_NAME"}'
 
 #la release è opzionale e manuale.
 Perform Maven Release:
   stage: release
   image: maven:alpine
+  before_script:
+    - apk add --update git && rm -rf /var/cache/apk/*
   script:
     - "mvn $MAVEN_CLI_OPTS -Dresume=false release:prepare release:perform -Pprod -DskipTests"
   only:
