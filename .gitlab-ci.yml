@@ -51,16 +51,27 @@ catapult-deploy-image:
 #la release è opzionale e manuale.
 Perform Maven Release:
   stage: release
-  image: maven:alpine
-  before_script:
-    - 'which git || (apk add --update git && rm -rf /var/cache/apk/*)'
-    - 'which ssh-agent || (apk add --update openssh-client && rm -rf /var/cache/apk/* )'
-    - eval $(ssh-agent -s)
-    - ssh-add <(echo "$GIT_SSH_PRIV_KEY")
-    - git config --global user.email "marco.spasiano@cnr.it"
-    - git config --global user.name "marco.spasiano"
+  image: java:8u102-jdk
   script:
-    - "mvn $MAVEN_CLI_OPTS -Dresume=false release:prepare release:perform -Pprod -DskipTests"
+    # Install ssh-agent if not already installed, it is required by Docker.
+    # (change apt-get to yum if you use a CentOS-based image)
+    - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
+
+    # Run ssh-agent (inside the build environment)
+    - eval $(ssh-agent -s)
+
+    # Add the SSH key stored in GIT_SSH_PRIV_KEY variable to the agent store
+    - ssh-add <(echo "$GIT_SSH_PRIV_KEY")
+
+    # For Docker builds disable host key checking. Be aware that by adding that
+    # you are susceptible to man-in-the-middle attacks.
+    # WARNING: Use this only with the Docker executor, if you use it with shell
+    # you will overwrite your user's SSH config.
+    - mkdir -p ~/.ssh
+    - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
+    - git checkout -B "$CI_BUILD_REF_NAME"
+    - mvn release:prepare $MAVEN_CLI_OPTS -B -DskipTests=true
+    - mvn release:perform $MAVEN_CLI_OPTS -B -DskipTests=true
   only:
     - master
   when: manual
