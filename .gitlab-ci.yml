@@ -11,8 +11,8 @@ stages:
 variables:
   MAVEN_OPTS: "-Djava.awt.headless=true -Dmaven.repo.local=./.m2/repository -Dnexus.url=$NEXUS_URL -Dnexus.login=$NEXUS_USERNAME -Dnexus.pwd=$NEXUS_PASSWORD"
   MAVEN_CLI_OPTS: "-s .m2/settings.xml --batch-mode --errors --fail-at-end --show-version"
-  CONTAINER_TEST_IMAGE: $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME
-  CONTAINER_RELEASE_IMAGE: $CI_REGISTRY_IMAGE:latest
+  CONTAINER_TEST_IMAGE: $CI_PROJECT_NAME:$CI_COMMIT_REF_NAME
+  CONTAINER_RELEASE_IMAGE: $CI_PROJECT_NAME:latest
 
 cache:
   paths:
@@ -38,16 +38,6 @@ docker-build-push-master:
     - docker push $CONTAINER_RELEASE_IMAGE
   only:
     - master
-
-#la docker build dei branch diversi dal master viene fatta sempre.
-docker-build-push-branch:
-  stage: build
-  script:
-    - docker build -t $CONTAINER_TEST_IMAGE .  
-  except:
-    - master
-#    - spring-boot-2
-
 
 #Aggiorno il container con l'immagine docker creata.
 catapult-deploy-image:
