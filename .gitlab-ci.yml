@@ -11,8 +11,8 @@ stages:
 variables:
   MAVEN_OPTS: "-Djava.awt.headless=true -Dmaven.repo.local=./.m2/repository -Dnexus.url=$NEXUS_URL -Dnexus.login=$NEXUS_USERNAME -Dnexus.pwd=$NEXUS_PASSWORD"
   MAVEN_CLI_OPTS: "-s .m2/settings.xml --batch-mode --errors --fail-at-end --show-version"
-  CONTAINER_TEST_IMAGE: $CI_PROJECT_NAME:$CI_COMMIT_REF_NAME
-  CONTAINER_RELEASE_IMAGE: $CI_PROJECT_NAME:latest
+  CONTAINER_TEST_IMAGE: $CI_PROJECT_PATH:$CI_COMMIT_REF_NAME
+  CONTAINER_RELEASE_IMAGE: $CI_PROJECT_PATH:latest
 
 cache:
   paths:
@@ -34,7 +34,7 @@ docker-build-push-master:
   script:
     - docker build -t $CONTAINER_TEST_IMAGE .  
     - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY  
-    - docker tag $CI_REGISTRY/$CONTAINER_TEST_IMAGE $CONTAINER_RELEASE_IMAGE
+    - docker tag $CONTAINER_TEST_IMAGE $CONTAINER_RELEASE_IMAGE
     - docker push $CI_REGISTRY/$CONTAINER_RELEASE_IMAGE
   only:
     - master
@@ -46,7 +46,7 @@ catapult-deploy-image:
     - apk add --update curl && rm -rf /var/cache/apk/*
   script:
     - >
-      curl --fail -s  -X POST $CATAPULT_URL -H 'Content-type:application/json' --data '{"id":"$CI_PROJECT_NAME:$CI_COMMIT_REF_NAME"}'
+      curl --fail -s  -X POST $CATAPULT_URL -H 'Content-type:application/json' --data '{"id":"$CI_PROJECT_PATH:$CI_COMMIT_REF_NAME"}'
 
 #la release è opzionale e manuale.
 Perform Maven Release:
