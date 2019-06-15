@@ -54,13 +54,17 @@ docker-build-push-branches:
 #Aggiorno il container con l'immagine docker creata.
 catapult-deploy-image:
   stage: catapult
+  dependencies:
+    - docker-build-push-branches
+    - docker-build-push-master
   before_script:
     - apk add --update curl && rm -rf /var/cache/apk/*
   script:
     - >
-      curl --fail -s  -X POST $CATAPULT_URL -H 'Content-type:application/json' --data '{"id":"'"$CI_PROJECT_PATH:$CI_COMMIT_REF_NAME"'"}'
+      curl --fail -s  -X POST $CATAPULT_URL -H 'Content-type:application/json' --data '{"id":"'"$CI_PRO JECT_PATH:$CI_COMMIT_REF_NAME"'"}'
   except:
     - tags
+
 #la release è opzionale e manuale.
 Perform Maven Release:
   stage: release

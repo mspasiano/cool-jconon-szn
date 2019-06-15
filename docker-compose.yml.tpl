@@ -3,7 +3,6 @@ cool-jconon-szn:
   mem_limit: 1g
   read_only: true
   environment:
-  - FLOWS_ENABLE=true
   - LANG=it_IT.UTF-8
   - LANGUAGE=it_IT:it
   - LC_ALL=it_IT.UTF-8
