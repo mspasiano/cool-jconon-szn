@@ -51,8 +51,9 @@ catapult-deploy-image:
 #la release è opzionale e manuale.
 Perform Maven Release:
   stage: release
-  image: java:8u102-jdk
+  image: maven:alpine
   script:
+    - 'which git || (apk add --update git && rm -rf /var/cache/apk/*)'
     # Install ssh-agent if not already installed, it is required by Docker.
     # (change apt-get to yum if you use a CentOS-based image)
     - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
