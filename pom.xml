@@ -285,7 +285,7 @@
         <connection>scm:git:git@git.si.cnr.it:documentale/cool-jconon-szn.git</connection>
         <developerConnection>scm:git:git@git.si.cnr.it:documentale/cool-jconon-szn.git</developerConnection>
         <url>http://git.si.cnr.it/documentale/cool-jconon-szn</url>
-        <tag>HEAD</tag>
+        <tag>cool-jconon-szn-0.0.5-SNAPSHOT</tag>
     </scm>
 
     <licenses>
