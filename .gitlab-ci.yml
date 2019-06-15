@@ -46,7 +46,7 @@ catapult-deploy-image:
     - apk add --update curl && rm -rf /var/cache/apk/*
   script:
     - >
-      curl -s  -X POST $CATAPULT_URL -H 'Content-type:application/json' --data '{"id":"'"$CI_PROJECT_PATH:$CI_COMMIT_REF_NAME"'"}'
+      curl --fail -s  -X POST $CATAPULT_URL -H 'Content-type:application/json' --data '{"id":"'"$CI_PROJECT_PATH:$CI_COMMIT_REF_NAME"'"}'
 
 #la release è opzionale e manuale.
 Perform Maven Release:
@@ -54,6 +54,13 @@ Perform Maven Release:
   image: maven:alpine
   before_script:
     - apk add --update git && rm -rf /var/cache/apk/*
+    - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
+    - eval $(ssh-agent -s)
+    - ssh-add <(echo "$GIT_SSH_PRIV_KEY")
+    - git config --global user.email "marco.spasiano@cnr.it"
+    - git config --global user.name "marco.spasiano"
+    - mkdir -p ~/.ssh
+    - cat gitlab-known-hosts >> ~/.ssh/known_hosts
   script:
     - "mvn $MAVEN_CLI_OPTS -Dresume=false release:prepare release:perform -Pprod -DskipTests"
   only:
