@@ -59,9 +59,10 @@ catapult-deploy-image:
     - docker-build-push-master
   before_script:
     - apk add --update curl && rm -rf /var/cache/apk/*
+    - echo '150.146.206.186 catapult.test.si.cnr.it' >> /etc/hosts
   script:
     - >
-      curl -s  -X POST $CATAPULT_URL -H 'Content-type:application/json' --data '{"id":"'"$CI_PRO JECT_PATH:$CI_COMMIT_REF_NAME"'", "git":true}'
+      curl --fail -s -X POST $CATAPULT_URL -H 'Content-type:application/json' --data '{"id":"'"$CI_PRO JECT_PATH:$CI_COMMIT_REF_NAME"'", "git":true}'
   except:
     - tags
 
