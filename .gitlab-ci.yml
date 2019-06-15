@@ -53,8 +53,8 @@ Perform Maven Release:
   stage: release
   image: maven:alpine
   before_script:
-    - apk add --update git && rm -rf /var/cache/apk/*
-    - 'which ssh-agent || ( apk update -y && apk install openssh-client -y )'
+    - 'which git || (apk add --update git && rm -rf /var/cache/apk/*)'
+    - 'which ssh-agent || (apk add --update openssh-client && rm -rf /var/cache/apk/* )'
     - eval $(ssh-agent -s)
     - ssh-add <(echo "$GIT_SSH_PRIV_KEY")
     - git config --global user.email "marco.spasiano@cnr.it"
