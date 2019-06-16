@@ -27,6 +27,20 @@ maven-deploy:
   artifacts:
     paths:
       - target/*.war
+  only:
+    - master
+    - tags
+
+maven-install:
+  stage: deploy
+  image: maven:alpine
+  script: "mvn clean install $MAVEN_CLI_OPTS"
+  artifacts:
+    paths:
+      - target/*.war
+  except:
+    - tags
+    - master
 
 #Ad ogni nuovo commit sul master viene fatta la push sul docker registry.
 docker-build-push-master:
