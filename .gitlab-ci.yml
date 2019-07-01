@@ -22,7 +22,8 @@ maven-deploy-central:
   image: maven:3-jdk-8
   before_script:
     - gpg --batch --keyserver ha.pool.sks-keyservers.net --recv-keys AB4649ED8B0734E701EC2BD95B7084F542CA29FA;
-    - cat gpg.conf > /root/.gnupg/gpg.conf
+    - echo "use-agent
+      pinentry-mode loopback" > /root/.gnupg/gpg.conf
     - echo "$GPG_PRIVATE_KEY" | gpg --batch --import
   script: "mvn clean deploy -Pprod,maven-central -Dsonar.host.url=http://sonar.si.cnr.it:9000 -Dnexus.url=$SONATYPE_URL -Dnexus.login=$SONATYPE_USERNAME -Dnexus.pwd=$SONATYPE_PASSWORD -Dnexus.repository.releases=$SONATYPE_REPOSITORY_RELEASES -Dgpg.passphrase=$GPG_PASSPHRASE -DskipTests"
   artifacts:
