@@ -22,7 +22,7 @@ maven-deploy-central:
   image: maven:3-jdk-8
   before_script:
     - gpg --batch --keyserver ha.pool.sks-keyservers.net --recv-keys AB4649ED8B0734E701EC2BD95B7084F542CA29FA;
-    - gpg --export --armor AB4649ED8B0734E701EC2BD95B7084F542CA29FA | sudo apt-key add -
+    - gpg --export --armor AB4649ED8B0734E701EC2BD95B7084F542CA29FA | apt-key add -
     - echo "pinentry-mode loopback" > /root/.gnupg/gpg.conf;
     - echo -e $GPG_PRIVATE_KEY | gpg --batch --import
   script:
