@@ -19,7 +19,7 @@ cache:
 
 maven-deploy-central:
   stage: deploy
-  image: maven:alpine
+  image: quay.io/mhart/alpine-node:8
   before_script:
     - 'which gnupg || ( apk add --update gnupg && rm -rf /var/cache/apk/*)'
     - echo "$GPG_PRIVATE_KEY" | gpg --batch --import --pinentry-mode loopback --no-tty
