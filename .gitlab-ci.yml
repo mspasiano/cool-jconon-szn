@@ -25,4 +25,4 @@ maven-deploy-central:
     - echo $CI_COMMIT_DESCRIPTION
   only:
     variables:
-      - $CI_COMMIT_MESSAGE !== "[maven-release-plugin] prepare for next development iteration"
+      - $CI_COMMIT_MESSAGE != "[maven-release-plugin] prepare for next development iteration"
