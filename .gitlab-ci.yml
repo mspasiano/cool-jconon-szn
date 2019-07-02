@@ -24,4 +24,4 @@ maven-deploy-central:
     - gpg -v --list-keys
   except:
     variables:
-      - $CI_COMMIT_MESSAGE == "release"
+      - $CI_COMMIT_TAG
