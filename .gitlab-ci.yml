@@ -20,7 +20,7 @@ cache:
 maven-deploy-central:
   stage: deploy
   image: maven:3-jdk-8
-  before_script:
+  script:
     - gpg -v --list-keys
   only:
     - master
