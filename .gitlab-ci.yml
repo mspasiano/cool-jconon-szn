@@ -20,7 +20,6 @@ maven-deploy-central:
   stage: deploy
   image: maven:3-jdk-8
   script:
-    - gpg -v --list-keys
-  only:
-    variables:
-      - $CI_COMMIT_TAG
+    - echo $CI_COMMIT_MESSAGE
+    - echo $CI_COMMIT_TITLE
+    - echo $CI_COMMIT_DESCRIPTION
