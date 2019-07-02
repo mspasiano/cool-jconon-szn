@@ -26,4 +26,4 @@ maven-deploy-central:
     - master
   except:
     variables:
-      - $CI_COMMIT_MESSAGE = "release"
+      - $CI_COMMIT_MESSAGE == "release"
