@@ -32,3 +32,6 @@ maven-deploy-central:
       - target/*.war
   only:
     - master
+  except:
+    variables:
+      - $CI_COMMIT_MESSAGE = /^release\/.*$/
