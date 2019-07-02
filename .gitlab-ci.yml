@@ -23,6 +23,6 @@ maven-deploy-central:
     - echo $CI_COMMIT_MESSAGE
     - echo $CI_COMMIT_TITLE
     - echo $CI_COMMIT_DESCRIPTION
-  only:
+  except:
     variables:
       - $CI_COMMIT_MESSAGE == "pippo"
