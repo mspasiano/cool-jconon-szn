@@ -14,6 +14,7 @@ variables:
 cache:
   paths:
     - ./.m2/repository
+  #TEST
   key: "$CI_BUILD_REF_NAME"
 
 maven-deploy-central:
