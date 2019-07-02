@@ -25,4 +25,5 @@ maven-deploy-central:
   only:
     - master
   except:
-    - /^release\/.*$/
+    variables:
+      - $CI_COMMIT_MESSAGE = "release"
