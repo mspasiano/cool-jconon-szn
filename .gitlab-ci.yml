@@ -22,8 +22,6 @@ maven-deploy-central:
   image: maven:3-jdk-8
   script:
     - gpg -v --list-keys
-  only:
-    - master
   except:
     variables:
-      - CI_COMMIT_MESSAGE == "release"
+      - $CI_COMMIT_MESSAGE == "release"
