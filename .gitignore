@@ -1,9 +1,14 @@
-# Created by .ignore support plugin (hsz.mobi)
-### Example user template template
-### Example user template
-
-# IntelliJ project files
-.idea
 *.iml
-out
-gen
+.idea
+target
+*.sublime-workspace
+activemq-data
+.classpath
+.project
+.settings/
+/logs/
+/docker-compose/jconon_logs
+/docker-compose/contentstore
+/docker-compose/alfresco_logs
+/docker-compose/pgdata
+/node_modules/

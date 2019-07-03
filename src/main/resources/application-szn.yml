@@ -1,4 +1,4 @@
-repository.base.url: http://alfresco-community-szn.test.si.cnr.it/alfresco/
+repository.base.url: http://localhost:9080/alfresco/
 org.apache.chemistry.opencmis.binding.spi.type: browser
 
 user.admin.password: admin

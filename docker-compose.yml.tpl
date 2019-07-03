@@ -6,6 +6,7 @@ cool-jconon-szn:
   - LANG=it_IT.UTF-8
   - LANGUAGE=it_IT:it
   - LC_ALL=it_IT.UTF-8
+  - REPOSITORY_BASE_URL==http://alfresco-community-szn.test.si.cnr.it/alfresco/
   - SERVICE_TAGS=webapp
   - SERVICE_NAME=##{SERVICE_NAME}##
   labels:
